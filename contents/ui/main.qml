@@ -7,14 +7,17 @@ import org.kde.plasma.plasmoid 2.0
 PlasmoidItem {
     id: root
 
+    property int orientation: plasmoid.configuration.orientation
+    property int orientationAngle: 0
+
     Layout.preferredWidth: {
-        switch (plasmoid.configuration.orientation) {
+        switch (orientation) {
             case 0: return Kirigami.Units.gridUnit * 10;
             default: return Kirigami.Units.gridUnit * 4;
         }
     }
     Layout.preferredHeight: {
-        switch (plasmoid.configuration.orientation) {
+        switch (orientation) {
             case 0: return Kirigami.Units.gridUnit * 2;
             default: return Kirigami.Units.gridUnit * 12;
         }
@@ -29,12 +32,10 @@ PlasmoidItem {
         onTriggered: updateDate()
     }
 
-    property int orientationAngle: 0
-
     function updateDate() {
         dateLabel.text = Qt.formatDate(new Date(), (plasmoid.configuration.dateFormat || "dddd dd MMMM"))
 
-        switch (plasmoid.configuration.orientation) {
+        switch (orientation) {
             case 1:
                 orientationAngle = -90
                 break
@@ -62,9 +63,9 @@ PlasmoidItem {
             font.bold: plasmoid.configuration.fontBold
             font.italic: plasmoid.configuration.fontItalic
             font.pixelSize: {
-                switch (plasmoid.configuration.orientation) {
+                switch (orientation) {
                     case 0: root.width * (plasmoid.configuration.fontSizeRatio / 20 || 0.1);
-                    default: root.width * (plasmoid.configuration.fontSizeRatio / 30 || 0.1);
+                    default: root.width * (plasmoid.configuration.fontSizeRatio / 100 || 0.1);
                 }
             }
 
@@ -78,7 +79,7 @@ PlasmoidItem {
                 origin.x: dateLabel.width / 2
                 origin.y: dateLabel.height / 2
                 angle: {
-                    switch (plasmoid.configuration.orientation) {
+                    switch (orientation) {
                         case 1: return -90;
                         case 2: return 90;
                         case 0: return 0;

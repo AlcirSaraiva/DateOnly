@@ -78,8 +78,8 @@ KCM.SimpleKCM {
             
             model: [
                 i18n("Horizontal"),
-                i18n("Vertical 1 (bottom to top)"),
-                i18n("Vertical 2 (top to bottom)")
+                i18n("Vertical bottom to top"),
+                i18n("Vertical top to bottom")
             ]
 
             currentIndex: {
