@@ -9,6 +9,7 @@ PlasmoidItem {
 
     property int orientation: plasmoid.configuration.orientation
     property int orientationAngle: 0
+    property double fontSize: 0.1
 
     Layout.preferredWidth: {
         switch (orientation) {
@@ -22,6 +23,8 @@ PlasmoidItem {
             default: return Kirigami.Units.gridUnit * 12;
         }
     }
+
+    
 
     Timer {
         id: timer
@@ -38,16 +41,20 @@ PlasmoidItem {
         switch (orientation) {
             case 1:
                 orientationAngle = -90
+                fontSize = root.width * (plasmoid.configuration.fontSizeRatio / 20)
                 break
             case 2:
                 orientationAngle = 90
+                fontSize = root.width * (plasmoid.configuration.fontSizeRatio / 20)
                 break
             case 0:
                 orientationAngle = 0
+                fontSize = root.width * (plasmoid.configuration.fontSizeRatio / 100)
                 break
         }
 
-        labelRotation.angle = orientationAngle;
+        labelRotation.angle = orientationAngle
+        dateLabel.font.pixelSize = fontSize        
     }
 
     Rectangle {
@@ -62,12 +69,7 @@ PlasmoidItem {
             font.family: (plasmoid.configuration.fontFamily || "FreeSans")
             font.bold: plasmoid.configuration.fontBold
             font.italic: plasmoid.configuration.fontItalic
-            font.pixelSize: {
-                switch (orientation) {
-                    case 0: root.width * (plasmoid.configuration.fontSizeRatio / 20 || 0.1);
-                    default: root.width * (plasmoid.configuration.fontSizeRatio / 100 || 0.1);
-                }
-            }
+            font.pixelSize: fontSize
 
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter

@@ -10,7 +10,7 @@
     "Name": "DateOnly",
     "Id": "DateOnly",
     "Description": "A panel plasmoid that displays only the date.",
-    "Icon": "preferences-system-time",
+    "Icon": "date",
     "License": "GPL-3.0+",
     "Version": "0.9",
     "EnabledByDefault": true,
